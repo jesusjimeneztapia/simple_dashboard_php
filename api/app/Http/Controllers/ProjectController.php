@@ -1,10 +1,10 @@
 <?php
-namespace Projects\App\Http\Controllers\Api;
+namespace SimpleDashboardPHP\Api\App\Http\Controllers;
 
-use Projects\App\Models\Project;
-use Projects\Core\Response;
+use SimpleDashboardPHP\Core\Response;
+use SimpleDashboardPHP\Pages\Examples\Projects\App\Models\Project;
 
-class ProjectApiController
+class ProjectController
 {
   public function getAll() {
     $projects = Project::all();
@@ -18,13 +18,13 @@ class ProjectApiController
   }
 
   public function update($projectId, $body) {
-    $project = Project::findById($projectId);
+    $project = Project::find($projectId);
     $project->update($body);
     return Response::json(["project" => $project->getAttributes()])->send();
   }
 
   public function destroy($projectId) {
-    $project = Project::findById($projectId);
+    $project = Project::find($projectId);
     $project->delete();
     return Response::text("")->status(204)->send();
   }

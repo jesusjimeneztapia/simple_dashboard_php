@@ -1,6 +1,6 @@
 <?php
+use SimpleDashboardPHP\Core\View;
 
-use Projects\Core\View;
 ?>
 <!-- Default box -->
 <div class="card">

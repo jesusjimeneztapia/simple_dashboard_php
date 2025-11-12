@@ -1,18 +1,18 @@
 <?php
-namespace Projects\App\Http\Controllers;
+namespace SimpleDashboardPHP\Pages\Examples\Projects\App\Http\Controllers;
 
-use Projects\App\Models\Project;
-use Projects\Core\View;
+use SimpleDashboardPHP\Core\View;
+use SimpleDashboardPHP\Pages\Examples\Projects\App\Models\Project;
 
 class ProjectController
 {
   public function index() {
     $projects = Project::all();
 
-    return View::render("layouts/ProjectsLayout", [
+    return View::render("layouts/AppLayout", [
       "head" => ["title" => "Projects"],
       "body" => [
-        "content" => "ProjectsPage",
+        "content" => "projects/ProjectsPage",
         "data" => [
           "sidebar" => [
             "activeNavLinkId" => "pages",
@@ -26,7 +26,7 @@ class ProjectController
 
   public function show($projectId) {
     $project = Project::find($projectId);
-    return View::render("layouts/ProjectsLayout", [
+    return View::render("layouts/AppLayout", [
       "head" => ["title" => "Project Detail"],
       "body" => [
         "content" => "projects/ProjectDetail",
@@ -42,7 +42,7 @@ class ProjectController
   }
 
   public function create() {
-    return View::render("layouts/ProjectsLayout", [
+    return View::render("layouts/AppLayout", [
       "head" => ["title" => "Project Add"],
       "body" => [
         "content" => "projects/ProjectForm",
@@ -58,7 +58,7 @@ class ProjectController
 
   public function edit($projectId) {
     $project = Project::find($projectId);
-    return View::render("layouts/ProjectsLayout", [
+    return View::render("layouts/AppLayout", [
       "head" => ["title" => "Project Edit"],
       "body" => [
         "content" => "projects/ProjectForm",

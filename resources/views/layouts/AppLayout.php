@@ -1,15 +1,15 @@
 <?php
-use Projects\Core\View;
+use SimpleDashboardPHP\Core\View;
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <?= View::render("layouts/components/ProjectsLayoutHead", ["head" => $head ?? []]) ?>
+  <?= View::render("layouts/components/AppLayoutHead", ["head" => $head ?? []]) ?>
 
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-      <?= View::render("layouts/components/ProjectsLayoutNavbar") ?>
-      <?= View::render("layouts/components/ProjectsLayoutSidebar", ["sidebar" => $sidebar ?? []]) ?>
+      <?= View::render("layouts/components/AppLayoutNavbar") ?>
+      <?= View::render("layouts/components/AppLayoutSidebar", ["sidebar" => $sidebar ?? []]) ?>
       
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -39,9 +39,9 @@ use Projects\Core\View;
       </div>
       <!-- /.content-wrapper -->
   
-      <?= View::render("layouts/components/ProjectsLayoutFooter") ?>
+      <?= View::render("layouts/components/AppLayoutFooter") ?>
     </div>
     
-    <?= View::render("layouts/components/ProjectsLayoutScript") ?>
+    <?= View::render("layouts/components/AppLayoutScript") ?>
   </body>
 </html>

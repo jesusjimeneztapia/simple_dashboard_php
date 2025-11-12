@@ -1,5 +1,5 @@
 <?php
-namespace Projects\Core;
+namespace SimpleDashboardPHP\Core;
 
 class Response
 {

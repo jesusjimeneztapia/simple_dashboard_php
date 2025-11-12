@@ -95,7 +95,7 @@
 </table>
 
 <script>
-  const API_BASE = "<?= base_url() . "/api" ?>"
+  const API_BASE = "<?= base_url(true) . "/api/projects" ?>"
 
   const $projectsTable = document.querySelector("#projects-table")
 

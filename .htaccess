@@ -1,0 +1,5 @@
+RewriteEngine On
+
+# RewriteBase /simple_dashboard_php/
+
+RewriteRule ^test test_htaccess.html [L]

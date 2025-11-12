@@ -1,9 +1,9 @@
 <?php
-namespace Projects\Core;
+namespace SimpleDashboardPHP\Core;
 
 class View
 {
-  private static $path = "/../views/";
+  private static $path = "/../resources/views/";
   private static $default_extension = ".php";
 
   static function render($template, $data = []) {

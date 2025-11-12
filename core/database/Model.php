@@ -1,5 +1,5 @@
 <?php
-namespace Projects\Core\Database;
+namespace SimpleDashboardPHP\Core\Database;
 
 abstract class Model
 {
@@ -12,26 +12,22 @@ abstract class Model
 
   public function __construct(array $data = [])
   {
-    // Llenado masivo de atributos permitidos
     foreach ($data as $key => $value) {
       if (in_array($key, $this->fillable)) {
         $this->attributes[$key] = $value;
       }
     }
 
-    // Si viene id, guardarlo
     if (isset($data['id'])) {
       $this->id = $data['id'];
     }
   }
 
-  // 👉 Método para registrar la conexión global una sola vez
   public static function setConnection(\mysqli $connection): void
   {
     self::$connection = $connection;
   }
 
-  // 👉 Obtener la conexión (como Eloquent hace con getConnection())
   protected static function getConnection(): \mysqli
   {
     if (!self::$connection) {
@@ -41,7 +37,6 @@ abstract class Model
   }
 
   public static function all() {
-    // Crea una instancia del modelo que llamó a all()
     $instance = new static();
 
     $conn = self::getConnection();
@@ -78,33 +73,14 @@ abstract class Model
 
     $data = $result->fetch_assoc();
     if (!$data) {
-      return null; // No encontrado
+      return null;
     }
 
-    // Crear una nueva instancia del modelo con los datos
     $model = new static($data);
-    // $model->id = (int) $data['id'];
 
     return $model;
   }
 
-  public static function findById($id) {
-    $instance = new static();
-
-    $connection = self::getConnection();
-    $query = "SELECT * FROM " . $instance->table . " WHERE id=" . $id;
-
-    $result = $connection->query($query);
-
-    if (!$result) {
-      throw new \Exception("Query failed: " . $connection->error);
-    }
-
-    $data = $result->fetch_array(MYSQLI_ASSOC);
-    return new static($data);
-  }
-
-  // Asignación individual
   public function __set($name, $value)
   {
     if (in_array($name, $this->fillable)) {
@@ -117,7 +93,6 @@ abstract class Model
     return $this->attributes[$name] ?? null;
   }
 
-  // Guardar registro
   public function save()
   {
     if (empty($this->attributes)) {
@@ -127,7 +102,6 @@ abstract class Model
     $connection = self::getConnection();
 
     if ($this->id) {
-      // UPDATE
       $sets = [];
       foreach ($this->attributes as $key => $value) {
         $escaped = mysqli_real_escape_string($connection, $value);
@@ -137,16 +111,13 @@ abstract class Model
       if (!mysqli_query($connection, $sql)) {
         throw new \Exception("Update failed: " . mysqli_error($connection));
       }
-      // mysqli_query($connection, $sql);
     } else {
-      // INSERT
       $columns = implode(',', array_keys($this->attributes));
       $values = implode(',', array_map(fn($v) => "'" . mysqli_real_escape_string($connection, $v) . "'", $this->attributes));
       $sql = "INSERT INTO `$this->table` ($columns) VALUES ($values)";
       if (!mysqli_query($connection, $sql)) {
         throw new \Exception("Insert failed: " . mysqli_error($connection));
       }
-      // mysqli_query($connection, $sql);
       $this->id = mysqli_insert_id($connection);
     }
 
@@ -155,7 +126,6 @@ abstract class Model
 
   public function update(array $data = [])
   {
-    // Llenado masivo de atributos permitidos
     foreach ($data as $key => $value) {
       if (in_array($key, $this->fillable)) {
         $this->attributes[$key] = $value;

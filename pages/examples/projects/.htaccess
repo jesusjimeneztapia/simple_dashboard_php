@@ -1,9 +1,13 @@
 # Activar el motor de reescritura
 RewriteEngine On
 
+# IMPORTANTE: establecer RewriteBase relativa al subdirectorio
+# (es decir, la ruta desde la raíz del dominio hasta esta carpeta)
+# RewriteBase /simple_dashboard_php/pages/examples/projects/
+
 # Si el archivo o directorio existe, usarlo directamente
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Redirigir todo lo demás a index.php
-RewriteRule ^(.*)$ index.php [QSA,L]
+RewriteRule ^ index.php [QSA,L]

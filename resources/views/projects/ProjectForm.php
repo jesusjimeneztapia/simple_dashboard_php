@@ -119,7 +119,7 @@ $estimated_project_duration = isset($project) ? $project->estimated_project_dura
 </form>
 
 <script>
-  const API_BASE = "<?= base_url() . "/api" ?>"
+  const API_BASE = "<?= base_url(true) . "/api/projects" ?>"
   const projectId = "<?= $projectId ?>"
 
   const $createProjectForm = document.querySelector("#project-form")

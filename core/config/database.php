@@ -1,0 +1,7 @@
+<?php
+require_once __DIR__ . "/../../database/connection.php";
+require_once __DIR__ . "/../database/Model.php";
+
+use SimpleDashboardPHP\Core\Database\Model;
+
+Model::setConnection($connection);

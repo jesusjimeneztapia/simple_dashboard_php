@@ -1,7 +1,7 @@
 <?php
-namespace Projects\App\Models;
+namespace SimpleDashboardPHP\Pages\Examples\Projects\App\Models;
 
-use Projects\Core\Database\Model;
+use SimpleDashboardPHP\Core\Database\Model;
 
 class Project extends Model
 {

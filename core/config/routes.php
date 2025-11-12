@@ -1,6 +1,5 @@
 <?php
-
-use Projects\Core\Route;
+use SimpleDashboardPHP\Core\Route;
 
 Route::instance();
 
