@@ -6,8 +6,11 @@ use SimpleDashboardPHP\Pages\Examples\Projects\App\Models\Project;
 
 class ProjectController
 {
-  public function index() {
-    $projects = Project::all();
+  public function index($queryParams) {
+    $page = (int) ($queryParams["page"] ?? 1);
+    $per_page = (int) ($queryParams["per_page"] ?? 10);
+
+    $projects = Project::paginate($page, $per_page);
 
     return View::render("layouts/AppLayout", [
       "head" => ["title" => "Projects"],
